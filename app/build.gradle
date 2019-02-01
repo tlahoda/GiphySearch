@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.tlahoda.giphysearch"
+
+        minSdkVersion 26
+        targetSdkVersion 28
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "GIPHY_API_KEY", "\"3D4eoFI02H9dB4usdZDianWhSvN1woLv\""
+        }
+
+        release {
+            //this would be the production key if it was released
+            buildConfigField "String", "GIPHY_API_KEY", "\"3D4eoFI02H9dB4usdZDianWhSvN1woLv\""
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        buildTypes.each {
+            it.buildConfigField "String", "HTTPS_API_GIPHY_URL", "\"https://api.giphy.com/\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.recyclerview:recyclerview:$appcompatVersion"
+
+    implementation "com.android.support:support-annotations:$supportLibVersion"
+    annotationProcessor "com.android.support:support-annotations:$supportLibVersion"
+
+    implementation "com.android.support:design:$supportLibVersion"
+
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
+    implementation "androidx.cardview:cardview:$legacySupportVersion"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    implementation "com.annimon:stream:$annimonVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    implementation("com.github.bumptech.glide:glide:$glideVersion") {
+        exclude group: "com.android.support"
+    }
+
+    implementation "org.parceler:parceler-api:$parcelerVersion"
+    annotationProcessor "org.parceler:parceler:$parcelerVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rxBindingVersion"
+
+    testImplementation "junit:junit:$junitVersion"
+
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+}
